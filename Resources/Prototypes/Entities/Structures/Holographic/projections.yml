@@ -5,26 +5,25 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
-    canCollide: false
-  - type: Sprite
-    sprite: Structures/Holo/wetfloor.rsi
-    state: icon
-  - type: TimedDespawn
-    lifetime: 90
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 30
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - type: Transform
+      anchored: true
+    - type: Physics
+      bodyType: Static
+      canCollide: false
+    - type: Sprite
+      sprite: Structures/Holo/wetfloor.rsi
+      state: icon
+    - type: TimedDespawn
+      lifetime: 90
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger: !type:DamageTrigger
+            damage: 30
+          behaviors:
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
 
 - type: entity
   id: HoloFan
@@ -32,19 +31,18 @@
   name: holofan
   description: A barrier of hard light that blocks air, but nothing else.
   components:
-  - type: Sprite
-    sprite: Structures/Holo/holofan.rsi
-    state: icon
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
+    - type: Sprite
+      sprite: Structures/Holo/holofan.rsi
+      state: icon
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
-  - type: TimedDespawn
-    lifetime: 180
-  - type: Airtight
-    noAirWhenFullyAirBlocked: false
+    - type: TimedDespawn
+      lifetime: 180
+    - type: Airtight
+      noAirWhenFullyAirBlocked: false
 
 - type: entity
   id: HolosignSecurity
@@ -61,8 +59,7 @@
     - type: Fixtures
       fixtures:
         fix1:
-          shape:
-            !type:PhysShapeAabb
+          shape: !type:PhysShapeAabb
             bounds: "-0.3,-0.3,0.3,0.3"
           mask:
             - TableMask
@@ -83,36 +80,64 @@
   name: holographic force field
   description: A powerful temporal containment field that doesn't let anything through, not even a tesla or singularity.
   components:
-  - type: Physics
-    bodyType: Static
-    canCollide: true
-  - type: Sprite
-    sprite: Structures/Holo/field.rsi
-    state: icon
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        mask:
-        - FullTileMask
-        layer:
-        - GlassLayer
-  - type: TimedDespawn
-    lifetime: 180
-  - type: PointLight
-    enabled: true
-    radius: 3
-    color: blue
-  - type: Clickable
-  - type: ContainmentField
-    throwForce: 0
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 60
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Holo/field.rsi
+      state: icon
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          mask:
+            - FullTileMask
+          layer:
+            - GlassLayer
+    - type: TimedDespawn
+      lifetime: 180
+    - type: PointLight
+      enabled: true
+      radius: 3
+      color: blue
+    - type: Clickable
+    - type: ContainmentField
+      throwForce: 0
+    - type: Destructible
+      thresholds:
+        - trigger: !type:DamageTrigger
+            damage: 60
+          behaviors:
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
+
+- type: entity
+  id: EffectFieldMarker
+  parent: BaseStructure
+  name: yea
+  description: yea
+  components:
+    - type: Transform
+      anchored: true
+    - type: Sprite
+      drawdepth: Effects
+      noRot: true
+      layers:
+        - shader: unshaded
+          map: ["enum.EffectLayers.Unshaded"]
+          sprite: _moonshine/field_marker.rsi
+          state: icon
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+    - type: Physics
+      bodyType: Static
+      canCollide: false
+    - type: Tag
+      tags:
+        - HideContextMenu
+    - type: TimedDespawn
+      lifetime: 0.9

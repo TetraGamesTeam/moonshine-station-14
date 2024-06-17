@@ -4,69 +4,148 @@
   name: containment field generator
   description: A machine that generates a containment field when powered by an emitter. Keeps the Singularity docile.
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.4
-        density: 190
-        mask:
-        - FullTileMask
-        layer:
-        - WallLayer
-  - type: InteractionOutline
-  - type: Anchorable
-  - type: Sprite
-    sprite: Structures/Power/Generation/Singularity/containment.rsi
-    state: icon
-    noRot: true
-    layers:
-      - state: icon
-      - state: p1
-        map: ["powerLight"]
-        visible: false
-        shader: unshaded
-      - state: a1
-        map: ["fieldLight"]
-        visible: false
-        shader: unshaded
-      - state: on
-        map: ["connectedLight"]
-        visible: false
-        shader: unshaded
-  - type: Icon
-    sprite: Structures/Power/Generation/Singularity/containment.rsi
-    state: icon
-  - type: ContainmentFieldGenerator
-  - type: PointLight
-    enabled: false
-    color: "#4080FF"
-    radius: 32
-    energy: 2.0
-    softness: 32.0
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.ContainmentFieldGeneratorVisuals.PowerLight:
-        powerLight:
-          NoPower: {visible: false}
-          LowPower: {visible: true, state: p1}
-          MediumPower: {visible: true, state: p3}
-          HighPower: {visible: true, state: p6}
-      enum.ContainmentFieldGeneratorVisuals.FieldLight:
-        fieldLight:
-          NoLevel: {visible: false}
-          On: {visible: true, state: a1}
-          OneField: {visible: true, state: a2}
-          MultipleFields: {visible: true, state: a3}
-      enum.ContainmentFieldGeneratorVisuals.OnLight:
-        connectedLight:
-          True: { visible: true }
-          False: { visible: false }
-  - type: GuideHelp
-    guides: [ Singularity, Power ]
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeCircle
+            radius: 0.4
+          density: 190
+          mask:
+            - FullTileMask
+          layer:
+            - WallLayer
+    - type: InteractionOutline
+    - type: Anchorable
+    - type: Sprite
+      sprite: Structures/Power/Generation/Singularity/containment.rsi
+      state: icon
+      noRot: true
+      layers:
+        - state: icon
+        - state: p1
+          map: ["powerLight"]
+          visible: false
+          shader: unshaded
+        - state: a1
+          map: ["fieldLight"]
+          visible: false
+          shader: unshaded
+        - state: on
+          map: ["connectedLight"]
+          visible: false
+          shader: unshaded
+    - type: Icon
+      sprite: Structures/Power/Generation/Singularity/containment.rsi
+      state: icon
+    - type: ContainmentFieldGenerator
+    - type: PointLight
+      enabled: false
+      color: "#4080FF"
+      radius: 32
+      energy: 2.0
+      softness: 32.0
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.ContainmentFieldGeneratorVisuals.PowerLight:
+          powerLight:
+            NoPower: { visible: false }
+            LowPower: { visible: true, state: p1 }
+            MediumPower: { visible: true, state: p3 }
+            HighPower: { visible: true, state: p6 }
+        enum.ContainmentFieldGeneratorVisuals.FieldLight:
+          fieldLight:
+            NoLevel: { visible: false }
+            On: { visible: true, state: a1 }
+            OneField: { visible: true, state: a2 }
+            MultipleFields: { visible: true, state: a3 }
+        enum.ContainmentFieldGeneratorVisuals.OnLight:
+          connectedLight:
+            True: { visible: true }
+            False: { visible: false }
+    - type: GuideHelp
+      guides: [Singularity, Power]
 
+- type: entity
+  parent: BaseStructure
+  id: ForceFieldGenerator
+  name: force field generator
+  description: Custom Examination Tab.
+  components:
+    - type: ApcPowerReceiver
+      powerLoad: 200
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeCircle
+            radius: 0.4
+          density: 190
+          mask:
+            - FullTileMask
+          layer:
+            - WallLayer
+    - type: InteractionOutline
+    - type: Airtight
+    - type: Anchorable
+    - type: Machine
+    - type: Sprite
+      sprite: Structures/Power/Generation/Singularity/containment.rsi
+      state: icon
+      noRot: true
+      layers:
+        - state: icon
+        - state: p1
+          map: ["powerLight"]
+          visible: false
+          shader: unshaded
+        - state: a1
+          map: ["fieldLight"]
+          visible: false
+          shader: unshaded
+        - state: on
+          map: ["connectedLight"]
+          visible: false
+          shader: unshaded
+    - type: Icon
+      sprite: Structures/Power/Generation/Singularity/containment.rsi
+      state: icon
+    - type: ForceFieldGenerator
+    - type: PointLight
+      enabled: false
+      color: "#4080FF"
+      radius: 32
+      energy: 2.0
+      softness: 32.0
+    - type: Appearance
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      receiveFrequencyId: SmartLight
+    - type: WirelessNetworkConnection
+      range: 200
+    - type: DeviceLinkSink
+      ports:
+        - On
+        - Off
+        - Toggle
+    - type: ExtensionCableReceiver
+    - type: GenericVisualizer
+      visuals:
+        enum.ContainmentFieldGeneratorVisuals.PowerLight:
+          powerLight:
+            NoPower: { visible: false }
+            LowPower: { visible: true, state: p1 }
+            MediumPower: { visible: true, state: p3 }
+            HighPower: { visible: true, state: p6 }
+        enum.ContainmentFieldGeneratorVisuals.FieldLight:
+          fieldLight:
+            NoLevel: { visible: false }
+            On: { visible: true, state: a1 }
+            OneField: { visible: true, state: a2 }
+            MultipleFields: { visible: true, state: a3 }
+        enum.ContainmentFieldGeneratorVisuals.OnLight:
+          connectedLight:
+            True: { visible: true }
+            False: { visible: false }
 
 - type: entity
   id: ContainmentField
@@ -75,31 +154,62 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: InteractionOutline
-  - type: Clickable
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        mask:
-        - FullTileMask
-        layer:
-        - GlassLayer
-  - type: Sprite
-    sprite: Structures/Power/Generation/Singularity/containment_field.rsi
-    state: field
-    noRot: true
-  - type: Icon
-    sprite: Structures/Power/Generation/Singularity/containment_field.rsi
-    state: field
-  - type: ContainmentField
-    throwForce: 50
-  - type: SyncSprite
-  - type: GuideHelp
-    guides: [ Singularity, Power ]
+    - type: InteractionOutline
+    - type: Clickable
+    - type: Physics
+      bodyType: Static
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          mask:
+            - FullTileMask
+          layer:
+            - GlassLayer
+    - type: Sprite
+      sprite: Structures/Power/Generation/Singularity/containment_field.rsi
+      state: field
+      noRot: true
+    - type: Icon
+      sprite: Structures/Power/Generation/Singularity/containment_field.rsi
+      state: field
+    - type: ContainmentField
+      throwForce: 50
+    - type: SyncSprite
+    - type: GuideHelp
+      guides: [Singularity, Power]
 
-
+- type: entity
+  id: AtmosForceField
+  name: force field
+  description: Custom Examination Tab.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Transform
+      anchored: true
+    - type: Physics
+      bodyType: Static
+      canCollide: false
+    - type: InteractionOutline
+    - type: Clickable
+    - type: Airtight
+      noAirWhenFullyAirBlocked: false
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          mask:
+            - FullTileMask
+          layer:
+            - GlassLayer
+    - type: Sprite
+      sprite: _moonshine/force_field.rsi
+      state: icon
+      noRot: true
+    - type: Icon
+      sprite: _moonshine/force_field.rsi
+      state: icon
+    - type: SyncSprite
